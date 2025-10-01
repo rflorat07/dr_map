@@ -1,3 +1,3 @@
 # dr_map
 
-A new Flutter project.
+State Mgmt in Flutter with Riverpod Code Generation
