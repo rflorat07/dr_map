@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/enums.dart';
@@ -38,15 +39,41 @@ class SelectedProvinces extends _$SelectedProvinces {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ProvincesList extends _$ProvincesList {
   @override
   List<Province> build() {
-    return ref.read(mockedProvincesProvider);
+    return []; //ref.read(mockedProvincesProvider);
   }
 
   void updateProvinces(List<Province> provinces) {
     state = [...provinces];
+  }
+}
+
+@riverpod
+Future<bool> fetchProvinces(Ref ref) async {
+  try {
+    String allProvinces = '';
+    final allProvincesResponse = await http.get(
+      Uri.parse('https://api.digital.gob.do/v1/territories/provinces'),
+    );
+
+    if (allProvincesResponse.statusCode == 200) {
+      allProvinces = allProvincesResponse.body;
+    }
+
+    final mappedData =
+        ((json.decode(allProvinces) as Map<String, dynamic>)['data']
+                as List<dynamic>)
+            .map((e) => Province.fromJson(e))
+            .toList();
+
+    ref.read(provincesListProvider.notifier).updateProvinces(mappedData);
+
+    return true;
+  } catch (e) {
+    return Future.error('issue with the data');
   }
 }
 

@@ -126,7 +126,7 @@ final class ProvincesListProvider
         argument: null,
         retry: null,
         name: r'provincesListProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -147,7 +147,7 @@ final class ProvincesListProvider
   }
 }
 
-String _$provincesListHash() => r'44c6f813e51185db48446d96a79fe6e6ecec9789';
+String _$provincesListHash() => r'8a4950341edb115790142dd9bca3206f168cb772';
 
 abstract class _$ProvincesList extends $Notifier<List<Province>> {
   List<Province> build();
@@ -167,6 +167,39 @@ abstract class _$ProvincesList extends $Notifier<List<Province>> {
     element.handleValue(ref, created);
   }
 }
+
+@ProviderFor(fetchProvinces)
+const fetchProvincesProvider = FetchProvincesProvider._();
+
+final class FetchProvincesProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  const FetchProvincesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fetchProvincesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fetchProvincesHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool> create(Ref ref) {
+    return fetchProvinces(ref);
+  }
+}
+
+String _$fetchProvincesHash() => r'9703c9bf769a5f8d350e3fdaf668489778717839';
 
 @ProviderFor(mockedProvinces)
 const mockedProvincesProvider = MockedProvincesProvider._();
