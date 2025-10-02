@@ -78,11 +78,11 @@ Future<bool> fetchProvinces(Ref ref) async {
 }
 
 @riverpod
-List<Province> mockedProvinces(Ref ref) {
+Future<bool> mockedProvinces(Ref ref) async {
   final allProvincesAsString = '''
   [
     {
-      "name": "Distrito Nacional",
+      "name": "FAKE Distrito Nacional",
       "code": "01",
       "identifier": "1001",
       "regionCode": "10"
@@ -275,9 +275,15 @@ List<Province> mockedProvinces(Ref ref) {
     }
   ]''';
 
-  return (json.decode(allProvincesAsString) as List<dynamic>)
+  final mappedData = (json.decode(allProvincesAsString) as List<dynamic>)
       .map((e) => Province.fromJson(e))
       .toList();
+
+  await Future.delayed(const Duration(seconds: 3));
+
+  ref.read(provincesListProvider.notifier).updateProvinces(mappedData);
+
+  return Future.value(true);
 }
 
 @riverpod

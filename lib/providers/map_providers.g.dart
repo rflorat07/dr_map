@@ -205,8 +205,8 @@ String _$fetchProvincesHash() => r'9703c9bf769a5f8d350e3fdaf668489778717839';
 const mockedProvincesProvider = MockedProvincesProvider._();
 
 final class MockedProvincesProvider
-    extends $FunctionalProvider<List<Province>, List<Province>, List<Province>>
-    with $Provider<List<Province>> {
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
   const MockedProvincesProvider._()
     : super(
         from: null,
@@ -223,24 +223,16 @@ final class MockedProvincesProvider
 
   @$internal
   @override
-  $ProviderElement<List<Province>> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  List<Province> create(Ref ref) {
+  FutureOr<bool> create(Ref ref) {
     return mockedProvinces(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<Province> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<Province>>(value),
-    );
   }
 }
 
-String _$mockedProvincesHash() => r'ea3b422fb3089603f6e48f78b170912397d93281';
+String _$mockedProvincesHash() => r'd94e54688cb79112b650df733dcceadfa8eb67ec';
 
 @ProviderFor(SelectedRegion)
 const selectedRegionProvider = SelectedRegionProvider._();
