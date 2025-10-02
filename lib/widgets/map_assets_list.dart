@@ -10,6 +10,7 @@ class MapAssetsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -17,7 +18,7 @@ class MapAssetsList extends StatelessWidget {
       width: 300,
       height: 420,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: Column(

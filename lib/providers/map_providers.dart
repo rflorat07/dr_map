@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -293,5 +294,15 @@ class SelectedRegion extends _$SelectedRegion {
 
   void update(MapRegions selectedRegion) {
     state = selectedRegion;
+  }
+}
+
+@riverpod
+class AppTheme extends _$AppTheme {
+  @override
+  ThemeMode build() => ThemeMode.system;
+
+  void update(ThemeMode themeMode) {
+    state = themeMode;
   }
 }

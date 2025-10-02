@@ -10,6 +10,8 @@ class MapRegionsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     final regions = MapRegions.values;
     final selectedRegion = ref.watch(selectedRegionProvider);
 
@@ -18,7 +20,7 @@ class MapRegionsList extends ConsumerWidget {
       margin: EdgeInsets.all(16.0),
       width: MediaQuery.of(context).size.width / 2,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: Row(

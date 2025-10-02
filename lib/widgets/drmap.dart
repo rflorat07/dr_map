@@ -10,6 +10,8 @@ class DRMap extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     final selectedAssets = ref.watch(selectedMapAssetsProvider);
     final allProvindes = ref.watch(provincesListProvider);
     final selectedProvinces = ref.watch(selectedProvincesProvider);
@@ -18,29 +20,35 @@ class DRMap extends ConsumerWidget {
     return Stack(
       children: [
         SvgPicture.asset('./assets/svgs/map_assets/baserd.svg'),
-        SvgPicture.asset('./assets/svgs/provinces/islabeata.svg'),
-        SvgPicture.asset('./assets/svgs/provinces/islacatalina.svg'),
-        SvgPicture.asset('./assets/svgs/provinces/islasaona.svg'),
+        SvgPicture.asset(
+          './assets/svgs/provinces/islabeata.svg',
+          colorFilter: ColorFilter.mode(colorScheme.onSurface, BlendMode.srcIn),
+        ),
+        SvgPicture.asset(
+          './assets/svgs/provinces/islacatalina.svg',
+          colorFilter: ColorFilter.mode(colorScheme.onSurface, BlendMode.srcIn),
+        ),
+        SvgPicture.asset(
+          './assets/svgs/provinces/islasaona.svg',
+          colorFilter: ColorFilter.mode(colorScheme.onSurface, BlendMode.srcIn),
+        ),
 
         // Generate all provinces, highlight selected ones
         ...List.generate(allProvindes.length, (index) {
           final province = allProvindes[index];
-          var provinceColor = Color(0xFFFEFEE9);
+          var provinceColor = colorScheme.onSurface;
 
           if (selectedProvinces.contains(province)) {
-            provinceColor = Color.fromARGB(
-              200,
-              (index + 1) * 20,
-              (index + 2) * 30,
-              (index + 3) * 40,
-            );
+            provinceColor = Theme.of(context).brightness == Brightness.light
+                ? Color.fromARGB(
+                    200,
+                    (index + 1) * 20,
+                    (index + 2) * 30,
+                    (index + 3) * 40,
+                  )
+                : colorScheme.tertiaryContainer;
           } else if (selectedRegion.provinces.contains(province.regionCode)) {
-            provinceColor = Color.fromARGB(
-              100,
-              (index + 1) * 20,
-              (index + 2) * 30,
-              (index + 3) * 40,
-            );
+            provinceColor = Colors.green;
           }
 
           return SvgPicture.asset(
@@ -51,11 +59,19 @@ class DRMap extends ConsumerWidget {
 
         ...List.generate(selectedAssets.length, (index) {
           final asset = selectedAssets[index];
-          final assetName = asset == MapAssets.seas || asset == MapAssets.names
-              ? '${asset.name}_en'
-              : asset.name;
+          final seaOrNames =
+              asset == MapAssets.seas || asset == MapAssets.names;
 
-          return SvgPicture.asset('./assets/svgs/map_assets/$assetName.svg');
+          final assetName = seaOrNames ? '${asset.name}_en' : asset.name;
+
+          final assetColor = seaOrNames
+              ? ColorFilter.mode(colorScheme.surfaceTint, BlendMode.srcIn)
+              : null;
+
+          return SvgPicture.asset(
+            './assets/svgs/map_assets/$assetName.svg',
+            colorFilter: assetColor,
+          );
         }),
       ],
     );

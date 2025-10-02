@@ -286,3 +286,55 @@ abstract class _$SelectedRegion extends $Notifier<MapRegions> {
     element.handleValue(ref, created);
   }
 }
+
+@ProviderFor(AppTheme)
+const appThemeProvider = AppThemeProvider._();
+
+final class AppThemeProvider extends $NotifierProvider<AppTheme, ThemeMode> {
+  const AppThemeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appThemeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appThemeHash();
+
+  @$internal
+  @override
+  AppTheme create() => AppTheme();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ThemeMode value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ThemeMode>(value),
+    );
+  }
+}
+
+String _$appThemeHash() => r'ca1585e3cbef5172d578e91a1f92ef39928899e6';
+
+abstract class _$AppTheme extends $Notifier<ThemeMode> {
+  ThemeMode build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<ThemeMode, ThemeMode>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<ThemeMode, ThemeMode>,
+              ThemeMode,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

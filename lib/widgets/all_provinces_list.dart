@@ -9,6 +9,7 @@ class AllProvincesList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     final allProvinces = ref.watch(provincesListProvider);
 
@@ -17,7 +18,7 @@ class AllProvincesList extends ConsumerWidget {
       margin: EdgeInsets.all(16.0),
       width: 300,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: Column(
