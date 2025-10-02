@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../l10n/app_localizations.dart';
+import '../l10n/app_localizations_es.dart';
 import '../models/enums.dart';
 import '../models/province.dart';
 
@@ -305,4 +307,64 @@ class AppTheme extends _$AppTheme {
   void update(ThemeMode themeMode) {
     state = themeMode;
   }
+}
+
+class SupportLocales {
+  static const en = Locale('en', 'en_US');
+  static const es = Locale('es', 'ES');
+}
+
+@riverpod
+class AppLocale extends _$AppLocale {
+  @override
+  Locale build() => SupportLocales.es;
+
+  void update(Locale locale) {
+    state = locale;
+  }
+}
+
+@riverpod
+AppLocalizations appLocalizations(Ref ref) {
+  AppLocalizations appLocalizations;
+
+  try {
+    appLocalizations = lookupAppLocalizations(ref.watch(appLocaleProvider));
+  } on FlutterError {
+    appLocalizations = AppLocalizationsEs();
+  }
+
+  return appLocalizations;
+}
+
+@riverpod
+String localizedMapAssets(Ref ref, MapAssets mapAsset) {
+  final loc = ref.watch(appLocalizationsProvider);
+
+  switch (mapAsset) {
+    case MapAssets.seas:
+      return loc.seasLabel;
+    case MapAssets.coastalLine:
+      return loc.coastalLineLabel;
+    case MapAssets.rivers:
+      return loc.riversLabel;
+    case MapAssets.lakes:
+      return loc.lakesLabel;
+    case MapAssets.borders:
+      return loc.bordersLabel;
+    case MapAssets.names:
+      return loc.namesLabel;
+  }
+}
+
+@riverpod
+String localizedMapRegions(Ref ref, MapRegions region) {
+  final loc = ref.watch(appLocalizationsProvider);
+
+  return switch (region) {
+    MapRegions.none => loc.noneLabel,
+    MapRegions.north => loc.northLabel,
+    MapRegions.southEast => loc.southEastLabel,
+    MapRegions.southWest => loc.southWestLabel,
+  };
 }

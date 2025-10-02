@@ -12,6 +12,7 @@ class AllProvincesList extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     final allProvinces = ref.watch(provincesListProvider);
+    final loc = ref.watch(appLocalizationsProvider);
 
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -26,7 +27,7 @@ class AllProvincesList extends ConsumerWidget {
         spacing: 16.0,
         children: [
           Text(
-            'Provinces List',
+            loc.provincesLabel,
             style: textTheme.headlineSmall!.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -65,7 +66,7 @@ class AllProvincesList extends ConsumerWidget {
                 value:
                     allProvinces.length ==
                     ref.watch(selectedProvincesProvider).length,
-                title: Text('All Provinces'),
+                title: Text(loc.allProvincesLabel),
                 onChanged: (value) {
                   if (value!) {
                     ref

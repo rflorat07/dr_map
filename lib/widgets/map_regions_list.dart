@@ -14,6 +14,7 @@ class MapRegionsList extends ConsumerWidget {
 
     final regions = MapRegions.values;
     final selectedRegion = ref.watch(selectedRegionProvider);
+    final loc = ref.watch(appLocalizationsProvider);
 
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -27,7 +28,7 @@ class MapRegionsList extends ConsumerWidget {
         spacing: 16.0,
         children: [
           Text(
-            'Regions',
+            loc.regionsLabel,
             style: textTheme.headlineSmall!.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -37,16 +38,13 @@ class MapRegionsList extends ConsumerWidget {
             final region = regions[index];
 
             return ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 160),
-              child: ListTile(
-                title: Text(region.name),
-                leading: Icon(
-                  selectedRegion == region
-                      ? Icons.radio_button_checked
-                      : Icons.radio_button_unchecked,
-                ),
-                onTap: () {
-                  ref.read(selectedRegionProvider.notifier).update(region);
+              constraints: BoxConstraints(maxWidth: 170),
+              child: RadioListTile<MapRegions>(
+                value: region,
+                title: Text(ref.watch(localizedMapRegionsProvider(region))),
+                groupValue: selectedRegion,
+                onChanged: (value) {
+                  ref.read(selectedRegionProvider.notifier).update(value!);
                 },
               ),
             );

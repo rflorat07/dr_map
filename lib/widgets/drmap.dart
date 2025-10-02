@@ -16,6 +16,7 @@ class DRMap extends ConsumerWidget {
     final allProvindes = ref.watch(provincesListProvider);
     final selectedProvinces = ref.watch(selectedProvincesProvider);
     final selectedRegion = ref.watch(selectedRegionProvider);
+    final locale = ref.watch(appLocaleProvider);
 
     return Stack(
       children: [
@@ -62,7 +63,9 @@ class DRMap extends ConsumerWidget {
           final seaOrNames =
               asset == MapAssets.seas || asset == MapAssets.names;
 
-          final assetName = seaOrNames ? '${asset.name}_en' : asset.name;
+          final assetName = seaOrNames
+              ? '${asset.name}_${locale.languageCode}'
+              : asset.name;
 
           final assetColor = seaOrNames
               ? ColorFilter.mode(colorScheme.surfaceTint, BlendMode.srcIn)

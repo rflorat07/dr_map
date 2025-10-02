@@ -338,3 +338,257 @@ abstract class _$AppTheme extends $Notifier<ThemeMode> {
     element.handleValue(ref, created);
   }
 }
+
+@ProviderFor(AppLocale)
+const appLocaleProvider = AppLocaleProvider._();
+
+final class AppLocaleProvider extends $NotifierProvider<AppLocale, Locale> {
+  const AppLocaleProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appLocaleProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appLocaleHash();
+
+  @$internal
+  @override
+  AppLocale create() => AppLocale();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Locale value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Locale>(value),
+    );
+  }
+}
+
+String _$appLocaleHash() => r'3783f3fbe6d633750b6f3608328df88c001b7bac';
+
+abstract class _$AppLocale extends $Notifier<Locale> {
+  Locale build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<Locale, Locale>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<Locale, Locale>,
+              Locale,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+@ProviderFor(appLocalizations)
+const appLocalizationsProvider = AppLocalizationsProvider._();
+
+final class AppLocalizationsProvider
+    extends
+        $FunctionalProvider<
+          AppLocalizations,
+          AppLocalizations,
+          AppLocalizations
+        >
+    with $Provider<AppLocalizations> {
+  const AppLocalizationsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appLocalizationsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appLocalizationsHash();
+
+  @$internal
+  @override
+  $ProviderElement<AppLocalizations> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AppLocalizations create(Ref ref) {
+    return appLocalizations(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AppLocalizations value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AppLocalizations>(value),
+    );
+  }
+}
+
+String _$appLocalizationsHash() => r'65fa9cd8245df50acb187af05979e291b3321feb';
+
+@ProviderFor(localizedMapAssets)
+const localizedMapAssetsProvider = LocalizedMapAssetsFamily._();
+
+final class LocalizedMapAssetsProvider
+    extends $FunctionalProvider<String, String, String>
+    with $Provider<String> {
+  const LocalizedMapAssetsProvider._({
+    required LocalizedMapAssetsFamily super.from,
+    required MapAssets super.argument,
+  }) : super(
+         retry: null,
+         name: r'localizedMapAssetsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$localizedMapAssetsHash();
+
+  @override
+  String toString() {
+    return r'localizedMapAssetsProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $ProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  String create(Ref ref) {
+    final argument = this.argument as MapAssets;
+    return localizedMapAssets(ref, argument);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is LocalizedMapAssetsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$localizedMapAssetsHash() =>
+    r'e2dffa75ac33d9f29483fc87a008566489d32bba';
+
+final class LocalizedMapAssetsFamily extends $Family
+    with $FunctionalFamilyOverride<String, MapAssets> {
+  const LocalizedMapAssetsFamily._()
+    : super(
+        retry: null,
+        name: r'localizedMapAssetsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  LocalizedMapAssetsProvider call(MapAssets mapAsset) =>
+      LocalizedMapAssetsProvider._(argument: mapAsset, from: this);
+
+  @override
+  String toString() => r'localizedMapAssetsProvider';
+}
+
+@ProviderFor(localizedMapRegions)
+const localizedMapRegionsProvider = LocalizedMapRegionsFamily._();
+
+final class LocalizedMapRegionsProvider
+    extends $FunctionalProvider<String, String, String>
+    with $Provider<String> {
+  const LocalizedMapRegionsProvider._({
+    required LocalizedMapRegionsFamily super.from,
+    required MapRegions super.argument,
+  }) : super(
+         retry: null,
+         name: r'localizedMapRegionsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$localizedMapRegionsHash();
+
+  @override
+  String toString() {
+    return r'localizedMapRegionsProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $ProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  String create(Ref ref) {
+    final argument = this.argument as MapRegions;
+    return localizedMapRegions(ref, argument);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is LocalizedMapRegionsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$localizedMapRegionsHash() =>
+    r'4bf3f7b7194fc23c7c1c61033b4716a5d94a4679';
+
+final class LocalizedMapRegionsFamily extends $Family
+    with $FunctionalFamilyOverride<String, MapRegions> {
+  const LocalizedMapRegionsFamily._()
+    : super(
+        retry: null,
+        name: r'localizedMapRegionsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  LocalizedMapRegionsProvider call(MapRegions region) =>
+      LocalizedMapRegionsProvider._(argument: region, from: this);
+
+  @override
+  String toString() => r'localizedMapRegionsProvider';
+}

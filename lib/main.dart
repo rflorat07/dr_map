@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
+import 'l10n/app_localizations.dart';
 import 'pages/dr_map.dart';
 import 'providers/map_providers.dart';
 import 'styles/themes.dart';
@@ -59,9 +61,20 @@ class DRMainAppState extends ConsumerState<DRMainApp>
   @override
   Widget build(BuildContext context) {
     final appTheme = ref.watch(appThemeProvider);
+    final selectedLocale = ref.watch(appLocaleProvider);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      locale: selectedLocale,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        ...AppLocalizations.localizationsDelegates,
+      ],
+      localeResolutionCallback: (locales, supportedLocales) {
+        Intl.defaultLocale = selectedLocale.toLanguageTag();
+        return selectedLocale;
+      },
+      supportedLocales: AppLocalizations.supportedLocales,
       home: DRMapApp(),
       themeMode: appTheme,
       theme: MapAppTheme.lightTheme,

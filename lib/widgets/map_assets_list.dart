@@ -4,13 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/enums.dart';
 import '../providers/map_providers.dart';
 
-class MapAssetsList extends StatelessWidget {
+class MapAssetsList extends ConsumerWidget {
   const MapAssetsList({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    final loc = ref.watch(appLocalizationsProvider);
 
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -26,7 +27,7 @@ class MapAssetsList extends StatelessWidget {
         spacing: 16.0,
         children: [
           Text(
-            'Show',
+            loc.showLabel,
             style: textTheme.headlineSmall!.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -43,7 +44,9 @@ class MapAssetsList extends StatelessWidget {
                     final assetValue = selectedMapAssets.contains(mapAsset);
 
                     return CheckboxListTile(
-                      title: Text(mapAsset.name),
+                      title: Text(
+                        ref.watch(localizedMapAssetsProvider(mapAsset)),
+                      ),
                       value: assetValue,
                       onChanged: (value) {
                         if (value!) {
